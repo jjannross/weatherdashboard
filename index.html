@@ -4,18 +4,90 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./assets/styles/style.css" />
   </head>
   <body>
-      <header>Weather Dashboard</header>
-      <!-- search with appended search history list 
+    <header>
+      <!-- header -->
+      <nav class="navbar navbar-light bg-dark">
+        <div class="container-fluid">
+          <span class="navbar-brand mb-0 h1">Weather Dashboard</span>
+        </div>
+      </nav>
+    </header>
+    <!-- right side search  -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-3 sidebar">
+          <h5 class="sidebar-header">Search for a City:</h5>
+          <form class="form-inline" id="citySearch">
+            <div class="input-group">
+              <div class="form-outline">
+                <input type="search" id="input-city" class="form-control" />
+                <label class="form-label" for="form1"></label>
+              </div>
+              <button type="submit" class="btn btn-primary" id="searchBtn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+        <!-- center/left weather results  -->
+        <div class="col-lg-9 card">
+          <div class="row">
+            <div class="col">
+              <div class="card-header display-5" id="cityName"></div>
+              <div class="card-body">
+                <h3></h3>
+                <p class="card-text" id="temp">temp</p>
+                <p class="card-text" id="humidity">humidity</p>
+                <p class="card-text" id="wind-speed">wind speed</p>
+                <p class="card-text" id="uv-index">UV Index</p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="card" id="day1">day 1</div>
+            </div>
+            <div class="col">
+              <div class="card" id="day2">day 2</div>
+            </div>
+            <div class="col">
+              <div class="card" id="day3">day 3</div>
+            </div>
+            <div class="col">
+              <div class="card" id="day4">day 4</div>
+            </div>
+            <div class="col">
+              <div class="card" id="day5">day 5</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- search with appended search history list 
       
         current weather
     
       searched city with 5 day forecast icons
 
       add in 2 api keys -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/scripts/script.js"></script>
-    <script type="text/javascript"></script>
   </body>
 </html>
