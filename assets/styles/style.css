@@ -1,5 +1,16 @@
+/* .navbar {
+  background-color: rgb(14, 14, 43);
+}
+span {
+  font-weight: 800px;
+  color: #ffffff;
+  text-align: center;
+} */
+.navbar {
+  justify-content: center;
+}
 .navbar-brand {
-  font-weight: 300px;
+  font-size: 40px;
   color: #ffffff;
   text-align: center;
 }
@@ -11,7 +22,10 @@
   font-weight: bold;
   font-size: 25px;
 }
-
+/* 
+#uv-index {
+  background-color: tomato;
+} */
 /* #temp:after {
   content: "°";
 } */

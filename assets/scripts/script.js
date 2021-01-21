@@ -53,10 +53,11 @@ $("#citySearch").on("submit", function (event) {
       url: oneCallURL,
       method: "GET",
     }).then(function (oneCall) {
-      var uv = oneCall.current.uvi;
+      //   var uv = oneCall.current.uvi;
 
-      $("#uv-index").text("UV Index: " + uv);
-      $(uv).attr(background - color, red);
+      $("#uv-index").text(oneCall.current.uvi);
+      //   $("#uv-index").text("UV Index: " + uv);
+      //   $(uv).attr(background - color, red);
       $("#day1").text(oneCall.daily[0]);
       $("#day2").text(oneCall.daily[1]);
       $("#day3").text(oneCall.daily[2]);
