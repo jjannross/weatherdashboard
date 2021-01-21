@@ -6,3 +6,12 @@
 .sidebar {
   background-color: rgb(243, 239, 239);
 }
+
+#cityName {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+/* #temp:after {
+  content: "°";
+} */

@@ -3,10 +3,16 @@
 //2. save searched city to local storage
 //3. append previously searched cities to right sidebar
 
+console.log("loaded");
+
 // Event listener for all button elements
 $("#citySearch").on("submit", function (event) {
   event.preventDefault();
+  console.log("click registered");
+
   var city = $("#input-city").val();
+  var date = new Date();
+  //   var today = date
   var queryURL =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
     city +
@@ -17,32 +23,46 @@ $("#citySearch").on("submit", function (event) {
   $.ajax({
     url: queryURL,
     method: "GET",
-  }).then(function (currentforecast) {
-    $("#cityName").text(response.name);
-    $("#temp").text(response.main.temp);
-    $("#humidity").text(response.main.humidity);
-    $("#wind-speed").text(response.wind[0]);
+  }).then(function (currentForecast) {
+    console.log(currentForecast);
+    console.log(currentForecast.city.coord.lat);
+    console.log(currentForecast.city.coord.lon);
 
+    $("#cityName").text(currentForecast.city.name + " (" + date + ")");
+    $("#temp").text(
+      "Temperature: " + currentForecast.list[0].main.temp + "° F"
+    );
+    $("#humidity").text(
+      "Humidity: " + currentForecast.list[0].main.humidity + "%"
+    );
+    $("#wind-speed").text(
+      "Wind Speed: " + currentForecast.list[0].wind.speed + " MPH"
+    );
+
+    var lat = currentForecast.city.coord.lat;
+    var lon = currentForecast.city.coord.lon;
     var oneCallURL =
       "https://api.openweathermap.org/data/2.5/onecall?lat=" +
       lat +
       "&lon=" +
       lon +
       "&exclude=minutely,hourly,&appid=7c6c4a90f3674b080b9c698fb64961da";
-    var lat = $("#input-city").val(response.city.coord[0]);
-    var lon = $("#input-city").val(response.city.coord[1]);
 
     //i need to get the long and lat for the one call api
     $.ajax({
       url: oneCallURL,
       method: "GET",
-    }).then(function (onecall) {
-      $("#uv-index").text(response.current[8]);
-      $("#day1").text(response.daily[0]);
-      $("#day2").text(response.daily[1]);
-      $("#day3").text(response.daily[2]);
-      $("#day4").text(response.daily[3]);
-      $("#day5").text(response.daily[4]);
+    }).then(function (oneCall) {
+      var uv = oneCall.current.uvi;
+
+      $("#uv-index").text("UV Index: " + uv);
+      $(uv).attr(background - color, red);
+      $("#day1").text(oneCall.daily[0]);
+      $("#day2").text(oneCall.daily[1]);
+      $("#day3").text(oneCall.daily[2]);
+      $("#day4").text(oneCall.daily[3]);
+      $("#day5").text(oneCall.daily[4]);
+      console.log(oneCall);
     });
   });
 });
