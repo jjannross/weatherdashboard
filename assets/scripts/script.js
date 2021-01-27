@@ -10,7 +10,6 @@ $("#citySearch").on("submit", function (event) {
     "https://api.openweathermap.org/data/2.5/weather?q=" +
     city +
     "&appid=7c6c4a90f3674b080b9c698fb64961da&units=imperial";
-  // api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
   // Performing our AJAX GET request
   $.ajax({
@@ -39,26 +38,52 @@ $("#citySearch").on("submit", function (event) {
       lon +
       "&exclude=minutely,hourly&appid=7c6c4a90f3674b080b9c698fb64961da&units=imperial";
 
-    //i need to get the long and lat for the one call api
     $.ajax({
       url: oneCallURL,
       method: "GET",
     }).then(function (oneCall) {
+      console.log(oneCall);
       $("#uv-index").text(oneCall.current.uvi);
 
+      // attempt at change uv index//
+      // var uv = $("#uv-index").text(oneCall.current.uvi);
+      // if (uv  3)
+      // else if (uv < 6)
+      // else if (uv < 10)
+      // $("#cityName").append(oneCall.current.weather[0].icon);
+
+      //  attempt at get icon//
+      var iconcode = oneCall.current.weather[0].icon;
+      var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
+      console.log(iconurl);
+      $("#wicon").attr("src", iconurl);
+
+      $("#day1").text(oneCall.daily[0]);
+      $("#day2").text(oneCall.daily[1]);
+      $("#day3").text(oneCall.daily[2]);
+      $("#day4").text(oneCall.daily[3]);
+      $("#day5").text(oneCall.daily[4]);
+      console.log(oneCall);
+      // //trying to get 5 day fore
       var forecastDate = new Date(oneCall.daily[1].dt * 1000);
-      var finalForecastDate =
-        date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
+      var dateArray = [];
 
       for (var i = 1; i < 6; i++) {
         var finalForecastDate = finalForecastDate[i];
-        //   console.log(finalForecastDate);
+        var finalForecastDate =
+          date.getMonth() +
+          1 +
+          "/" +
+          (date.getDate() + i) +
+          "/" +
+          date.getFullYear();
+        dateArray.push(finalForecastDate);
       }
+      console.log(dateArray);
 
-      var forecastDays = ["#day1", "#day2", "#day3", "#day4", "#day5"];
-      for (var d = 0; d < forecastDays.length; i++) {
+      for (var d = 0; d < forecastDays.length; d++) {
         var forecastDays = forecastDays[d];
-        //   console.log(forecastDays);
+        console.log(forecastDays);
       }
 
       $(forecastDays).html(`
@@ -66,7 +91,12 @@ $("#citySearch").on("submit", function (event) {
       <p>Temperature: ${oneCall.daily[1].temp.day}° F</p>
       <p>Humidity: ${oneCall.daily[1].humidity}%</p>`);
 
-      //   $("#day1").html(`
+      // $("#day1").html(`
+      //   <h6>${forecastDays[0]}</h6>
+      //   <p>Temperature: ${oneCall.daily[1].temp.day}° F</p>
+      //   <p>Humidity: ${oneCall.daily[1].humidity}%</p>`);
+
+      // $("#day2").html(`
       //   <h6>${finalForecastDate}</h6>
       //   <p>Temperature: ${oneCall.daily[1].temp.day}° F</p>
       //   <p>Humidity: ${oneCall.daily[1].humidity}%</p>`);
@@ -75,6 +105,8 @@ $("#citySearch").on("submit", function (event) {
       //   $("#day3").text(oneCall.daily[2]);
       //   $("#day4").text(oneCall.daily[3]);
       //   $("#day5").text(oneCall.daily[4]);
+
+      //attempt at local storage//
     });
   });
 });

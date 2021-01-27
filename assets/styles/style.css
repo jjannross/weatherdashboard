@@ -22,6 +22,20 @@ span {
   font-weight: bold;
   font-size: 25px;
 }
+
+.high-uv {
+  .bg-danger;
+}
+
+.moderate-uv {
+  .bg-warning; 
+
+}
+
+.low-uv {
+ .bg-success;
+}
+
 /* 
 #uv-index {
   background-color: tomato;
