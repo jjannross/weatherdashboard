@@ -45,31 +45,23 @@ $("#citySearch").on("submit", function (event) {
       console.log(oneCall);
       $("#uv-index").text(oneCall.current.uvi);
 
-      // attempt at change uv index//
-      // var uv = $("#uv-index").text(oneCall.current.uvi);
-      // if (uv  3)
-      // else if (uv < 6)
-      // else if (uv < 10)
-      // $("#cityName").append(oneCall.current.weather[0].icon);
+      $("#uv-index").each(function () {
+        var value = oneCall.current.uvi;
+        if (value <= 2) {
+          $("#uv-index").addClass("btn btn bg-success");
+        } else if (value >= 6) {
+          $("#uv-index").addClass("btn btn bg-danger");
+        } else if (value >= 3) {
+          $("#uv-index").addClass("btn btn bg-warning");
+        }
+      });
 
-      //  attempt at get icon//
-      var iconcode = oneCall.current.weather[0].icon;
-      var iconurl = "http://openweathermap.org/img/wn/" + iconcode + "@2x.png";
-      console.log(iconurl);
-      $("#wicon").attr("src", iconurl);
-
-      $("#day1").text(oneCall.daily[0]);
-      $("#day2").text(oneCall.daily[1]);
-      $("#day3").text(oneCall.daily[2]);
-      $("#day4").text(oneCall.daily[3]);
-      $("#day5").text(oneCall.daily[4]);
-      console.log(oneCall);
       // //trying to get 5 day fore
       var forecastDate = new Date(oneCall.daily[1].dt * 1000);
       var dateArray = [];
 
       for (var i = 1; i < 6; i++) {
-        var finalForecastDate = finalForecastDate[i];
+        var finalForecastDate = oneCall.daily[i];
         var finalForecastDate =
           date.getMonth() +
           1 +
@@ -78,35 +70,55 @@ $("#citySearch").on("submit", function (event) {
           "/" +
           date.getFullYear();
         dateArray.push(finalForecastDate);
+        $("#day" + i).html(`
+      <h6>${dateArray[i - 1]}</h6>
+      <p>Temperature: ${oneCall.daily[i].temp.day}° F</p>
+      <p>Humidity: ${oneCall.daily[i].humidity}%</p>`);
       }
-      console.log(dateArray);
-
-      for (var d = 0; d < forecastDays.length; d++) {
-        var forecastDays = forecastDays[d];
-        console.log(forecastDays);
-      }
-
-      $(forecastDays).html(`
-      <h6>${finalForecastDate}</h6>
-      <p>Temperature: ${oneCall.daily[1].temp.day}° F</p>
-      <p>Humidity: ${oneCall.daily[1].humidity}%</p>`);
-
-      // $("#day1").html(`
-      //   <h6>${forecastDays[0]}</h6>
-      //   <p>Temperature: ${oneCall.daily[1].temp.day}° F</p>
-      //   <p>Humidity: ${oneCall.daily[1].humidity}%</p>`);
-
-      // $("#day2").html(`
-      //   <h6>${finalForecastDate}</h6>
-      //   <p>Temperature: ${oneCall.daily[1].temp.day}° F</p>
-      //   <p>Humidity: ${oneCall.daily[1].humidity}%</p>`);
-
-      //   $("#day2").text(oneCall.daily[1]);
-      //   $("#day3").text(oneCall.daily[2]);
-      //   $("#day4").text(oneCall.daily[3]);
-      //   $("#day5").text(oneCall.daily[4]);
 
       //attempt at local storage//
+      var searchedCitiesInput = $("#input-city");
+
+      var citySearchForm = $("#citySearch");
+
+      function storesearchedCities() {
+        var searchedCities = localStorage.getItem("searched") || "[]";
+        var parsedSearched = JSON.parse(searchedCities);
+        parsedSearched.push(searchedCitiesInput.val());
+        searchedCitiesInput.value = "";
+        localStorage.setItem("searched", JSON.stringify(parsedSearched));
+      }
+
+      storesearchedCities();
+
+      function rendersearchedCities() {
+        var searchedCities = localStorage.getItem("searched") || "[]";
+        var parsedSearched = JSON.parse(searchedCities);
+        console.log(searchedCities);
+        searchedCities.innterHTML = "";
+        // var cityList = $("#searched");
+
+        for (var i = 0; i < searchedCities.length; i++) {
+          var searchedCities = searchedCities[i];
+
+          $("#searched" + i).html(`
+          <h6>${searchedCities[i]}</h6>;`);
+        }
+        rendersearchedCities();
+      }
+     searchedCities.addEventListener("click", function(event) {
+        var element = event.target;
+      
+        // If that element is a button...
+        if (element.matches("searchBtn") === true) {
+          // // Get its data-index value and remove the todo element from the list
+          // var index = element.parentElement.getAttribute("data-index");
+          // todos.splice(index, 1);
+      
+          // Store updated todos in localStorage, re-render the list
+          storesearchedCities();
+          rendersearchedCities();
     });
   });
+  
 });
