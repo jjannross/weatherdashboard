@@ -1,12 +1,12 @@
 # weatherdashboard
 
-This app allows a user to search for a city then displays the current weather for designated city
+This app allows a user to search for a city then displays the current weather for designated city. Two APIs are used to obtain the current days forecast, including a UV Index which is indicated to be low(green), unfavorable (yellow), or dangerous (red). A forecast for the next 5 days is provided as well.
 
-![to be added](./assets/images/1.png)
-![to be added](./assets/images/2.png)
-![to be added](./assets/images/3.png)
+![home page](./assets/images/1.png)
+![low UV Index](./assets/images/2.png)
+![dangerous UV Index](./assets/images/3.png)
 
-To visit the day planner [click here](https://jjannross.github.io/weatherdashboard/)
+To visit the weather dashboard [click here](https://jjannross.github.io/weatherdashboard/)
 
 ## Prerequisites
 
