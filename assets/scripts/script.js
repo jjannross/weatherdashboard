@@ -70,6 +70,42 @@ $("#citySearch").on("submit", function (event) {
       <p>Humidity: ${oneCall.daily[i].humidity}%</p>`);
       }
 
+      var futureIconID1 = oneCall.current.weather[0].icon;
+      var futureIconURL1 =
+        "https://openweathermap.org/img/w/" + futureIconID1 + ".png";
+      var futureIcon1 = $("<img>").attr("src", futureIconURL1);
+      $(".futureIcon1").empty();
+      $(".futureIcon1").append(futureIcon1);
+      console.log(futureIcon1);
+
+      var futureIconID2 = oneCall.current.weather[0].icon;
+      var futureIconURL2 =
+        "https://openweathermap.org/img/w/" + futureIconID2 + ".png";
+      var futureIcon2 = $("<img>").attr("src", futureIconURL2);
+      $(".futureIcon2").empty();
+      $(".futureIcon2").append(futureIcon2);
+
+      var futureIconID3 = oneCall.current.weather[0].icon;
+      var futureIconURL3 =
+        "https://openweathermap.org/img/w/" + futureIconID3 + ".png";
+      var futureIcon3 = $("<img>").attr("src", futureIconURL3);
+      $(".futureIcon3").empty();
+      $(".futureIcon3").append(futureIcon3);
+
+      var futureIconID4 = oneCall.current.weather[0].icon;
+      var futureIconURL4 =
+        "https://openweathermap.org/img/w/" + futureIconID4 + ".png";
+      var futureIcon4 = $("<img>").attr("src", futureIconURL4);
+      $(".futureIcon4").empty();
+      $(".futureIcon4").append(futureIcon4);
+
+      var futureIconID5 = oneCall.current.weather[0].icon;
+      var futureIconURL5 =
+        "https://openweathermap.org/img/w/" + futureIconID5 + ".png";
+      var futureIcon5 = $("<img>").attr("src", futureIconURL5);
+      $(".futureIcon5").empty();
+      $(".futureIcon5").append(futureIcon5);
+
       //attempt at local storage//
       // var searchedCitiesInput = $("#input-city");
 
